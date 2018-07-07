@@ -1,3 +1,8 @@
+Show_Example <- function(example, lambda) {
+  pCBP <- p.adjust(example[example<=lambda]/lambda, method = "bonferroni" )
+  return(c(length(pCBP), lambda*0.05/length(pCBP),pCBP))
+}
+
 Study_FWER <- function(model, sizes, nsim, nsim2){
 #This is for studying one of the models P1 - N3.
 	if (model == "P1") {

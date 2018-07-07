@@ -2,7 +2,29 @@ Produces tables and figures of paper.
 
 How to generate tables and figures of the paper:
 
-1. PRODUCE FWER TABLE
+1. PRODUCE OUTPUT OF EMPIRICIAL EXAMPLES
+
+#Example 1.1:
+load("ravenp1")
+Show_Example(ravenp1, lambda = 0.5)
+
+#Example 1.2:
+load("ravenp2")
+Show_Example(ravenp2, lambda = 0.5)
+
+#Example 1.3:
+load("ravenp3")
+Show_Example(ravenp3, lambda = 0.5)
+
+#Example 1.4:
+load("ravenp4")
+Show_Example(ravenp4, lambda = 0.5)
+
+#Example 3:
+load("natalcarep")
+Show_Example(natalcarep$p, lambda = 0.5)
+
+2. PRODUCE FWER TABLE
 
 sizes1<-c(2,3,4,5,6, 7,8,9,10,15,20,25,50,75, 100, 1000, 10000, 100000,1000000)
 sizes2<-c(2,3,4,5,6, 7,8,9,10,15,20,25,50,75, 100, 1000)
@@ -20,11 +42,11 @@ N2<-Study_FWER("N2", sizes1, 100, 10000)
 set.seed(2024)
 N3<-Study_FWER("N3", sizes1, 100, 10000)
 
-2. PRODUCE POWER TABLE
+3. PRODUCE POWER TABLE
 
 Study_RelativePower()
 
-3. PRODUCE POWER FIGURES
+4. PRODUCE POWER FIGURES
 
 set.seed(2025)
 nsim <- 10000
@@ -87,11 +109,11 @@ points(a$n0, a$`Conditional Bonferroni`, type = "b", pch=3, lty=1)
 points(a$n0, a$`Conditional FGS`, type = "b",pch=4, lty=1)
 legend("bottomleft", inset=.02, legend = c("Bonferroni", "FGS", "Conditional Bonferroni", "Conditional FGS"),lty = 1,pch=1:4, box.lty=1, cex=0.8)
 
-4. COMPUTE MINIMAX VALUE OF LAMBDA
+5. COMPUTE MINIMAX VALUE OF LAMBDA
 
 StudyMiniMax(100, 0.5, 1.0, 100, 10, 100, 10, 500, 0.5)
 
-5. PRODUCE FWER PLOTS (RUN SECTION 1 FIRST)
+6. PRODUCE FWER PLOTS (RUN SECTION 2 FIRST)
  
 plot(log(P1$m,2),P1$rej/nsim2, xlab = "log(size,2)", ylab= "FWER", ylim = c(0,0.1))
 title(main ="Model P1")
