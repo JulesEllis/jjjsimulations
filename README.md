@@ -6,23 +6,23 @@ How to generate tables and figures of the paper:
 
 #Example 1.1:
 load("ravenp1")
-Show_Example(ravenp1, lambda = 0.5)
+CBP(ravenp1, lambda = 0.5)
 
 #Example 1.2:
 load("ravenp2")
-Show_Example(ravenp2, lambda = 0.5)
+CBP(ravenp2, lambda = 0.5)
 
 #Example 1.3:
 load("ravenp3")
-Show_Example(ravenp3, lambda = 0.5)
+CBP(ravenp3, lambda = 0.5)
 
 #Example 1.4:
 load("ravenp4")
-Show_Example(ravenp4, lambda = 0.5)
+CBP(ravenp4, lambda = 0.5)
 
 #Example 3:
 load("natalcarep")
-Show_Example(natalcarep$p, lambda = 0.5)
+CBP(natalcarep$p, lambda = 0.5)
 
 2. PRODUCE FWER TABLE
 

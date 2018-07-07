@@ -1,5 +1,5 @@
-Show_Example <- function(example, lambda) {
-  pCBP <- p.adjust(example[example<=lambda]/lambda, method = "bonferroni" )
+CBP <- function(pvalues, lambda) {
+  pCBP <- p.adjust(pvalues[pvalues<=lambda]/lambda, method = "bonferroni" )
   return(c(length(pCBP), lambda*0.05/length(pCBP),pCBP))
 }
 
