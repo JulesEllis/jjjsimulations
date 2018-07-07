@@ -1,3 +1,5 @@
+Produces tables and figures of paper.
+
 How to generate tables and figures of the paper:
 
 1. PRODUCE FWER TABLE
