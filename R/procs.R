@@ -849,3 +849,52 @@ StudyMiniMax <- function(npi,minpi,maxpi,ndelta,maxdelta,nepsilon,maxepsilon,nla
 
 
 
+Study_Power_Fig4 <- function(nsim, effects, sizes, lambda, alpha, fraction) {
+  #This is to study the power in a range of situations, as displayed in figure 4 of the Supplementary Material of the paper.
+  nncp = length(effects)
+  nn = length(sizes)
+  ndpar = nncp * nncp * nn
+  print(ndpar)
+  ntest = 4
+  sigma0 = 1
+  sigma1 = 1
+  rej = array(0, 0)
+  i=1
+  for (ncp0 in effects){
+    for (ncp1 in effects) {
+      for (n in sizes) {
+        n0 = fraction*n
+        n1 = (1-fraction)*n
+        u <- Simulate_Power2(nsim, ncp0, ncp1,sigma0, sigma1,n0,n1,lambda,alpha)
+        rej<-c(rej,ncp0,ncp1,sigma0,sigma1,n0,n1,u/nsim)
+        i=i+1
+        print(i)
+      }}}
+  dim(rej)<-c(6 + ntest,ndpar)
+  rej<-t(rej)
+  rej <-data.frame(rej)
+  colnames(rej)<-c("ncp0","ncp1", "sigma0","sigma1","n0", "n1", "Bonferroni","FGS","Conditional Bonferroni","Conditional FGS")
+  return(rej)
+}
+
+Simulate_Power2 <- function(nsim, ncp0, ncp1,sigma0, sigma1,n0,n1,lambda,alpha){
+  #This is to simulate the power in a single setting of figure 4 of the Supplementary Material, but
+  #computes only Bonferroni and FGS to save time.
+  nrej<-array(0,4)
+  for (isim in 1:nsim) {
+    z0  = rnorm(n0,ncp0,sigma0)
+    z1  = rnorm(n1,-ncp1,sigma1)
+    z = c(z0,z1)
+    p = pnorm(z)
+    m = n0+n1
+    nrej[1] <- nrej[1] +Bonf(m,p,alpha)
+    nrej[2] <- nrej[2] +FGS(m,p,alpha,lambda)
+    pc<-p[p<= lambda]/lambda
+    mc <- length(pc)
+    if (mc > 0){
+      nrej[3] <- nrej[3] +Bonf(mc,pc,alpha)
+      nrej[4] <- nrej[4] +FGS(mc,pc,alpha,lambda)
+    }
+  }
+  return(nrej)
+}

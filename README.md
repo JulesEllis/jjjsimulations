@@ -46,7 +46,7 @@ N3<-Study_FWER("N3", sizes1, 100, 10000)
 
 Study_RelativePower()
 
-4. PRODUCE POWER FIGURES
+4. PRODUCE POWER FIGURES (figures 2 and 3 of manuscript)
 
 set.seed(2025)
 nsim <- 10000
@@ -113,7 +113,7 @@ legend("bottomleft", inset=.02, legend = c("Bonferroni", "FGS", "Conditional Bon
 
 StudyMiniMax(100, 0.5, 1.0, 100, 10, 100, 10, 500, 0.5)
 
-6. PRODUCE FWER PLOTS (RUN SECTION 2 FIRST)
+6. PRODUCE FWER PLOTS OF SUPPLEMENTARY MATERIAL (RUN SECTION 2 FIRST)
  
 plot(log(P1$m,2),P1$rej/nsim2, xlab = "log(size,2)", ylab= "FWER", ylim = c(0,0.1))
 title(main ="Model P1")
@@ -160,4 +160,57 @@ abline(h = 0.05, lty = 2)
 plot(N3$minr,N3$rej/nsim2, xlab = "correlation", ylab= "FWER", ylim = c(0,0.1))
 title(main ="Model N3")
 abline(h = 0.05, lty = 2)
+
+7. PRODUCE POWER PLOTS OF SUPPLEMENTARY MATERIAL (figure 4)
+
+set.seed(2028)
+nsim = 10000
+effects = c(0.5, 1, 1.5)
+sizes = c(200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000)
+lambda = 0.5
+alpha = 0.05
+a<- Study_Power2(nsim, effects, sizes, lambda, alpha, 0.5)
+
+b <- a
+shades=grey.colors(5)
+
+plot(b$Bonferroni,b$`Conditional Bonferroni`, xlab = "Power of Bonferroni", ylab = "Power of CBP", pch = 19, col=shades[2+2*(b$ncp0-b$ncp1)])
+ points(b$Bonferroni,b$Bonferroni, type="l")
+title("50% true hypotheses")
+
+
+plot(b$FGS,b$`Conditional FGS`, xlab = "Power of FGS", ylab = "Power of Conditionalized FGS", pch = 19, col=shades[2+2*(b$ncp0-b$ncp1)])
+points(b$FGS,b$FGS, type="l")
+title("50% true hypotheses")
+
+set.seed(2029)
+a<- Study_Power2(nsim, effects, sizes, lambda, alpha, 0.75)
+
+b <- a
+shades=grey.colors(5)
+
+plot(b$Bonferroni,b$`Conditional Bonferroni`, xlab = "Power of Bonferroni", ylab = "Power of CBP", pch = 19, col=shades[2+2*(b$ncp0-b$ncp1)])
+ points(b$Bonferroni,b$Bonferroni, type="l")
+title("75% true hypotheses")
+
+plot(b$FGS,b$`Conditional FGS`, xlab = "Power of FGS", ylab = "Power of Conditionalized FGS", pch = 19, col=shades[2+2*(b$ncp0-b$ncp1)])
+points(b$FGS,b$FGS, type="l")
+title("75% true hypotheses")
+
+
+set.seed(2030)
+a<- Study_Power2(nsim, effects, sizes, lambda, alpha, 0.25)
+
+b <- a
+shades=grey.colors(5)
+
+plot(b$Bonferroni,b$`Conditional Bonferroni`, xlab = "Power of Bonferroni", ylab = "Power of CBP", pch = 19, col=shades[2+2*(b$ncp0-b$ncp1)])
+ points(b$Bonferroni,b$Bonferroni, type="l")
+title("25% true hypotheses")
+
+plot(b$FGS,b$`Conditional FGS`, xlab = "Power of FGS", ylab = "Power of Conditionalized FGS", pch = 19, col=shades[2+2*(b$ncp0-b$ncp1)])
+points(b$FGS,b$FGS, type="l")
+title("25% true hypotheses")
+
+
 
